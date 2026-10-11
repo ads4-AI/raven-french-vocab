@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#1d2433">
+<title>Raven · French vocab · 12 Oct</title>
+<style>
+:root{--bg:#f6f4ef;--card:#fff;--ink:#1f2430;--mut:#6b7280;--acc:#4f6bed;--ok:#1f9d6b;--bad:#d9534f;--warn:#d98a1f;--line:#e4e1d9;--chip:#ecebe6}
+.dark{--bg:#141821;--card:#1f2533;--ink:#eef0f5;--mut:#9aa3b5;--acc:#8ea2ff;--ok:#3fcf94;--bad:#ff7b76;--warn:#f0b35a;--line:#2e3647;--chip:#2a3142}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;font-size:18px;line-height:1.4}
+body{padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)}
+.wrap{max-width:640px;margin:0 auto;padding:14px 16px 40px}
+header{display:flex;align-items:center;justify-content:space-between;gap:8px}
+h1{font-size:1.15rem;margin:6px 0}
+.icon{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:12px;min-width:44px;height:44px;font-size:1.1rem;cursor:pointer}
+.row{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
+.tabs button,.chips button{flex:1;min-height:46px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--ink);font-size:1rem;font-weight:600;cursor:pointer;padding:6px 10px}
+.chips button{flex:0 0 auto;min-height:40px;font-size:.92rem;font-weight:500;background:var(--chip)}
+.tabs button.on,.chips button.on{background:var(--acc);color:#fff;border-color:var(--acc)}
+.bar{height:10px;background:var(--line);border-radius:6px;overflow:hidden;margin:10px 0 4px}
+.bar>div{height:100%;background:var(--ok);width:0;transition:width .3s}
+.stats{display:flex;justify-content:space-between;color:var(--mut);font-size:.9rem}
+.card{background:var(--card);border:1px solid var(--line);border-radius:20px;min-height:260px;margin:14px 0;padding:22px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;box-shadow:0 4px 18px rgba(0,0,0,.06);cursor:pointer;user-select:none;position:relative}
+.card .lab{position:absolute;top:12px;left:16px;font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;color:var(--mut)}
+.card .sec{position:absolute;top:12px;right:16px;font-size:.78rem;color:var(--mut)}
+.card .star{position:absolute;bottom:10px;right:14px;color:var(--warn);font-size:1.1rem}
+.big{font-size:1.75rem;font-weight:650;line-height:1.25;word-break:break-word}
+.sub{color:var(--mut);margin-top:12px;font-size:1rem}
+.hint{color:var(--mut);font-size:.85rem;text-align:center}
+.btns{display:flex;gap:10px}
+.btns button,.main{flex:1;min-height:58px;border:none;border-radius:16px;font-size:1.08rem;font-weight:700;cursor:pointer;color:#fff}
+.b-bad{background:var(--warn)}.b-ok{background:var(--ok)}.main{background:var(--acc);width:100%}
+.b-sec{background:var(--chip)!important;color:var(--ink)!important;border:1px solid var(--line)!important}
+input[type=text]{width:100%;font-size:1.35rem;padding:14px 16px;border-radius:14px;border:2px solid var(--line);background:var(--card);color:var(--ink);outline:none}
+input[type=text]:focus{border-color:var(--acc)}
+.acc{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.acc button{min-width:44px;height:44px;border-radius:10px;border:1px solid var(--line);background:var(--chip);color:var(--ink);font-size:1.1rem;cursor:pointer}
+.fb{margin:10px 0;padding:12px 14px;border-radius:14px;font-size:1.05rem;display:none}
+.fb.ok{display:block;background:rgba(31,157,107,.14);color:var(--ok)}
+.fb.bad{display:block;background:rgba(217,83,79,.13);color:var(--bad)}
+.fb.near{display:block;background:rgba(217,138,31,.14);color:var(--warn)}
+.fb b{color:var(--ink)}
+.opts{display:grid;gap:10px}
+.opts button{min-height:58px;text-align:left;padding:12px 16px;border-radius:14px;border:2px solid var(--line);background:var(--card);color:var(--ink);font-size:1.05rem;cursor:pointer}
+.opts button.right{border-color:var(--ok);background:rgba(31,157,107,.14)}
+.opts button.wrong{border-color:var(--bad);background:rgba(217,83,79,.13)}
+.done{text-align:center;padding:24px 10px}
+.done .tick{font-size:4rem;color:var(--ok)}
+.small{font-size:.85rem;color:var(--mut)}
+.link{background:none;border:none;color:var(--acc);text-decoration:underline;cursor:pointer;font-size:.9rem;padding:6px}
+#confetti{position:fixed;inset:0;pointer-events:none;overflow:hidden}
+#confetti i{position:absolute;top:-20px;width:9px;height:14px;border-radius:2px;animation:fall 2.4s linear forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(720deg);opacity:.7}}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:12px;font-size:.95rem;opacity:0;transition:opacity .3s;pointer-events:none}
+.toast.show{opacity:1}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Raven · French vocab · 12 Oct</h1>
+    <div style="display:flex;gap:6px">
+      <button class="icon" id="dirBtn" title="Swap direction">EN→FR</button>
+      <button class="icon" id="themeBtn" title="Dark / light">◐</button>
+    </div>
+  </header>
+
+  <div class="row tabs" id="modes">
+    <button data-m="cards" class="on">Flashcards</button>
+    <button data-m="type">Type it</button>
+    <button data-m="quiz">Quiz</button>
+  </div>
+  <div class="row chips" id="decks"></div>
+
+  <div class="bar"><div id="prog"></div></div>
+  <div class="stats"><span id="sScore">Score 0</span><span id="sStreak">Streak 0</span><span id="sLeft">0 left</span></div>
+
+  <div id="stage"></div>
+  <div style="text-align:center;margin-top:6px">
+    <button class="link" id="restart">↻ Shuffle &amp; restart</button>
+    <button class="link" id="clearHard">Clear ★ Hard ones</button>
+  </div>
+  <p class="small" style="text-align:center">Allez 2 Unit 5 · En pleine forme ! · <span id="total"></span> words. Progress saves on this device.</p>
+</div>
+<div id="confetti"></div>
+<div class="toast" id="toast"></div>
+
+<script>
+const WORDS = [{"id": "1-1", "s": "Food", "en": "drinks", "fr": "les boissons"}, {"id": "1-2", "s": "Food", "en": "water", "fr": "l'eau (f)"}, {"id": "1-3", "s": "Food", "en": "cola", "fr": "le coca"}, {"id": "1-4", "s": "Food", "en": "sugary drinks", "fr": "les boissons sucrées"}, {"id": "1-5", "s": "Food", "en": "tea", "fr": "le thé"}, {"id": "1-6", "s": "Food", "en": "coffee", "fr": "le café"}, {"id": "1-7", "s": "Food", "en": "milk", "fr": "le lait"}, {"id": "1-8", "s": "Food", "en": "cereals and cereal products (starchy foods)", "fr": "les céréales et dérivés"}, {"id": "1-9", "s": "Food", "en": "cereals", "fr": "les céréales"}, {"id": "1-10", "s": "Food", "en": "bread", "fr": "le pain"}, {"id": "1-11", "s": "Food", "en": "rice", "fr": "le riz"}, {"id": "1-12", "s": "Food", "en": "pasta", "fr": "les pâtes"}, {"id": "1-13", "s": "Food", "en": "potatoes", "fr": "les pommes de terre"}, {"id": "1-14", "s": "Food", "en": "fruit and vegetables", "fr": "les fruits et les légumes"}, {"id": "1-15", "s": "Food", "en": "pineapple", "fr": "l'ananas (m)"}, {"id": "1-16", "s": "Food", "en": "pears", "fr": "les poires"}, {"id": "1-17", "s": "Food", "en": "carrots", "fr": "les carottes"}, {"id": "1-18", "s": "Food", "en": "dairy products", "fr": "les produits laitiers"}, {"id": "1-19", "s": "Food", "en": "cheese", "fr": "le fromage"}, {"id": "1-20", "s": "Food", "en": "yoghurt / yoghurts", "fr": "le yaourt / les yaourts"}, {"id": "1-21", "s": "Food", "en": "butter", "fr": "le beurre"}, {"id": "1-22", "s": "Food", "en": "meat", "fr": "la viande"}, {"id": "1-23", "s": "Food", "en": "chicken", "fr": "le poulet"}, {"id": "1-24", "s": "Food", "en": "fish", "fr": "le poisson"}, {"id": "1-25", "s": "Food", "en": "egg / eggs", "fr": "l'œuf (m) / les œufs"}, {"id": "1-26", "s": "Food", "en": "fats", "fr": "les matières grasses"}, {"id": "1-27", "s": "Food", "en": "oil", "fr": "l'huile (f)"}, {"id": "1-28", "s": "Food", "en": "sugar and sugary products", "fr": "le sucre et les produits sucrés"}, {"id": "1-29", "s": "Food", "en": "cakes", "fr": "les gâteaux"}, {"id": "1-30", "s": "Food", "en": "ice creams", "fr": "les glaces"}, {"id": "1-31", "s": "Food", "en": "chocolate", "fr": "le chocolat"}, {"id": "1-32", "s": "Food", "en": "hamburgers", "fr": "les hamburgers"}, {"id": "1-33", "s": "Food", "en": "chips (fries)", "fr": "les frites"}, {"id": "1-34", "s": "Food", "en": "breakfast", "fr": "le petit-déjeuner"}, {"id": "1-35", "s": "Food", "en": "dinner (evening meal)", "fr": "le dîner"}, {"id": "1-36", "s": "Food", "en": "a meal / meals", "fr": "un repas / les repas"}, {"id": "1-37", "s": "Food", "en": "I eat", "fr": "je mange"}, {"id": "1-38", "s": "Food", "en": "I drink", "fr": "je bois"}, {"id": "1-39", "s": "Food", "en": "I want cereal for my breakfast", "fr": "je veux des céréales pour mon petit-déjeuner"}, {"id": "2-1", "s": "Lifestyle", "en": "to live healthily", "fr": "vivre sainement"}, {"id": "2-2", "s": "Lifestyle", "en": "to lead a healthy life", "fr": "mener une vie saine"}, {"id": "2-3", "s": "Lifestyle", "en": "What do you do to live healthily?", "fr": "Que fais-tu pour vivre sainement ?"}, {"id": "2-4", "s": "Lifestyle", "en": "good habits", "fr": "les bonnes habitudes"}, {"id": "2-5", "s": "Lifestyle", "en": "the golden rules", "fr": "les règles d'or"}, {"id": "2-6", "s": "Lifestyle", "en": "I eat at regular times", "fr": "je mange à des heures régulières"}, {"id": "2-7", "s": "Lifestyle", "en": "I eat a balanced diet", "fr": "je mange équilibré"}, {"id": "2-8", "s": "Lifestyle", "en": "I eat healthily", "fr": "je mange sainement"}, {"id": "2-9", "s": "Lifestyle", "en": "I eat all day long", "fr": "je mange toute la journée"}, {"id": "2-10", "s": "Lifestyle", "en": "I eat at least five fruit and veg a day", "fr": "je mange au moins cinq fruits et légumes par jour"}, {"id": "2-11", "s": "Lifestyle", "en": "I hate vegetables", "fr": "je déteste les légumes"}, {"id": "2-12", "s": "Lifestyle", "en": "I'm vegetarian", "fr": "je suis végétarien / végétarienne"}, {"id": "2-13", "s": "Lifestyle", "en": "I drink a lot of water", "fr": "je bois beaucoup d'eau"}, {"id": "2-14", "s": "Lifestyle", "en": "I drink a litre of water a day", "fr": "je bois un litre d'eau par jour"}, {"id": "2-15", "s": "Lifestyle", "en": "more than two litres a day", "fr": "plus de deux litres par jour"}, {"id": "2-16", "s": "Lifestyle", "en": "I drink a lot of sugary drinks", "fr": "je bois beaucoup de boissons sucrées"}, {"id": "2-17", "s": "Lifestyle", "en": "I sleep eight hours a night", "fr": "je dors huit heures par nuit"}, {"id": "2-18", "s": "Lifestyle", "en": "between eight and nine hours a night", "fr": "entre huit heures et neuf heures par nuit"}, {"id": "2-19", "s": "Lifestyle", "en": "I sleep very little", "fr": "je dors très peu"}, {"id": "2-20", "s": "Lifestyle", "en": "How many hours do you sleep a night?", "fr": "Tu dors combien d'heures par nuit ?"}, {"id": "2-21", "s": "Lifestyle", "en": "I do sport", "fr": "je fais du sport"}, {"id": "2-22", "s": "Lifestyle", "en": "I do a lot of sport", "fr": "je fais beaucoup de sport"}, {"id": "2-23", "s": "Lifestyle", "en": "I don't do sport because it's too tiring", "fr": "je ne fais pas de sport car c'est trop fatigant"}, {"id": "2-24", "s": "Lifestyle", "en": "Do you do sport?", "fr": "Fais-tu du sport ? / Tu fais du sport ?"}, {"id": "2-25", "s": "Lifestyle", "en": "I dance", "fr": "je fais de la danse"}, {"id": "2-26", "s": "Lifestyle", "en": "I swim / go swimming", "fr": "je fais de la natation"}, {"id": "2-27", "s": "Lifestyle", "en": "I do yoga", "fr": "je fais du yoga"}, {"id": "2-28", "s": "Lifestyle", "en": "we go hiking in the holidays", "fr": "nous faisons de la randonnée pendant les vacances"}, {"id": "2-29", "s": "Lifestyle", "en": "I play football / tennis", "fr": "je joue au foot / au tennis"}, {"id": "2-30", "s": "Lifestyle", "en": "it's important to move / be active", "fr": "c'est important de bouger"}, {"id": "2-31", "s": "Lifestyle", "en": "What else do you do to be in shape?", "fr": "Que fais-tu d'autre pour être en forme ?"}, {"id": "3-1", "s": "Diet", "en": "a balanced diet", "fr": "une alimentation équilibrée"}, {"id": "3-2", "s": "Diet", "en": "health", "fr": "la santé"}, {"id": "3-3", "s": "Diet", "en": "Are you healthy?", "fr": "Tu es en bonne santé ?"}, {"id": "3-4", "s": "Diet", "en": "It's good for your health", "fr": "C'est bon pour la santé"}, {"id": "3-5", "s": "Diet", "en": "It's not good for your health", "fr": "Ce n'est pas bon pour la santé"}, {"id": "3-6", "s": "Diet", "en": "Why?", "fr": "Pourquoi ?"}, {"id": "3-7", "s": "Diet", "en": "because there are vitamins", "fr": "parce qu'il y a des vitamines"}, {"id": "3-8", "s": "Diet", "en": "rich in protein", "fr": "riche en protéines"}, {"id": "3-9", "s": "Diet", "en": "vitamins / fibre", "fr": "les vitamines / les fibres"}, {"id": "3-10", "s": "Diet", "en": "calcium", "fr": "le calcium"}, {"id": "3-11", "s": "Diet", "en": "too much sugar / fat", "fr": "trop de sucre / de graisses"}, {"id": "3-12", "s": "Diet", "en": "fatty products", "fr": "les produits gras"}, {"id": "3-13", "s": "Diet", "en": "consumption", "fr": "la consommation"}, {"id": "3-14", "s": "Diet", "en": "limit consumption", "fr": "limiter la consommation"}, {"id": "3-15", "s": "Diet", "en": "to reduce", "fr": "diminuer"}, {"id": "3-16", "s": "Diet", "en": "good for the heart / brain", "fr": "bon pour le cœur / le cerveau"}, {"id": "3-17", "s": "Diet", "en": "good for the skin / eyes", "fr": "bon pour la peau / les yeux"}, {"id": "3-18", "s": "Diet", "en": "good for the teeth / hair", "fr": "bon pour les dents / les cheveux"}, {"id": "3-19", "s": "Diet", "en": "good for the bones / muscles", "fr": "bon pour les os / les muscles"}, {"id": "3-20", "s": "Diet", "en": "nice hair", "fr": "de beaux cheveux"}, {"id": "3-21", "s": "Diet", "en": "healthy skin", "fr": "une peau saine"}, {"id": "3-22", "s": "Diet", "en": "a heart in great shape", "fr": "un cœur en pleine forme"}, {"id": "3-23", "s": "Diet", "en": "our brain works better", "fr": "notre cerveau fonctionne mieux"}, {"id": "3-24", "s": "Diet", "en": "What did you eat yesterday?", "fr": "Qu'as-tu mangé hier ?"}, {"id": "3-25", "s": "Diet", "en": "Yesterday at dinner I ate rice and vegetables", "fr": "Hier, au dîner, j'ai mangé du riz et des légumes"}, {"id": "3-26", "s": "Diet", "en": "I drank …", "fr": "j'ai bu …"}, {"id": "3-27", "s": "Diet", "en": "a lot of", "fr": "beaucoup de"}, {"id": "3-28", "s": "Diet", "en": "a little", "fr": "un peu de"}, {"id": "3-29", "s": "Diet", "en": "enough", "fr": "assez de"}, {"id": "3-30", "s": "Diet", "en": "a packet of crisps", "fr": "un paquet de chips"}, {"id": "3-31", "s": "Diet", "en": "a bottle of", "fr": "une bouteille de"}, {"id": "3-32", "s": "Diet", "en": "a glass of", "fr": "un verre de"}, {"id": "3-33", "s": "Diet", "en": "a slice / piece of", "fr": "une tranche de / un morceau de"}, {"id": "3-34", "s": "Diet", "en": "junk food / fast food", "fr": "la malbouffe / le fast-food"}, {"id": "3-35", "s": "Diet", "en": "sweets", "fr": "les bonbons"}, {"id": "3-36", "s": "Diet", "en": "to snack between meals", "fr": "grignoter entre les repas"}, {"id": "3-37", "s": "Diet", "en": "to skip breakfast", "fr": "sauter le petit-déjeuner"}, {"id": "3-38", "s": "Diet", "en": "to smoke / tobacco", "fr": "fumer / le tabac"}, {"id": "3-39", "s": "Diet", "en": "alcohol", "fr": "l'alcool (m)"}, {"id": "3-40", "s": "Diet", "en": "drugs", "fr": "la drogue / les drogues"}, {"id": "3-41", "s": "Diet", "en": "it's dangerous", "fr": "c'est dangereux"}, {"id": "4-1", "s": "Phrases", "en": "to be in good shape / fit", "fr": "pour être en forme"}, {"id": "4-2", "s": "Phrases", "en": "to be healthy", "fr": "pour être en bonne santé"}, {"id": "4-3", "s": "Phrases", "en": "you must / it is necessary to …", "fr": "il faut + infinitive"}, {"id": "4-4", "s": "Phrases", "en": "you must not …", "fr": "il ne faut pas + infinitive"}, {"id": "4-5", "s": "Phrases", "en": "it is important to …", "fr": "il est important de / d' …"}, {"id": "4-6", "s": "Phrases", "en": "it is essential to …", "fr": "il est essentiel de …"}, {"id": "4-7", "s": "Phrases", "en": "it is necessary to …", "fr": "il est nécessaire de …"}, {"id": "4-8", "s": "Phrases", "en": "it is important not to …", "fr": "il est important de ne pas …"}, {"id": "4-9", "s": "Phrases", "en": "You have to eat or drink …", "fr": "Il faut manger ou boire …"}, {"id": "4-10", "s": "Phrases", "en": "One has to drink water every day", "fr": "Il faut boire de l'eau tous les jours"}, {"id": "4-11", "s": "Phrases", "en": "once a day", "fr": "une fois par jour"}, {"id": "4-12", "s": "Phrases", "en": "once / twice a week", "fr": "une fois / deux fois par semaine"}, {"id": "4-13", "s": "Phrases", "en": "at least three times a week", "fr": "au moins trois fois par semaine"}, {"id": "4-14", "s": "Phrases", "en": "at least five a day", "fr": "au moins cinq par jour"}, {"id": "4-15", "s": "Phrases", "en": "with each meal", "fr": "à chaque repas"}, {"id": "4-16", "s": "Phrases", "en": "as much as you want", "fr": "à volonté"}, {"id": "4-17", "s": "Phrases", "en": "every day", "fr": "tous les jours"}, {"id": "4-18", "s": "Phrases", "en": "every week", "fr": "toutes les semaines"}, {"id": "4-19", "s": "Phrases", "en": "every weekend", "fr": "tous les week-ends"}, {"id": "4-20", "s": "Phrases", "en": "often", "fr": "souvent"}, {"id": "4-21", "s": "Phrases", "en": "regularly", "fr": "régulièrement"}, {"id": "4-22", "s": "Phrases", "en": "I eat some / of them every day", "fr": "j'en mange tous les jours"}, {"id": "4-23", "s": "Phrases", "en": "you often drink some", "fr": "tu en bois souvent"}, {"id": "4-24", "s": "Phrases", "en": "she does it regularly", "fr": "elle en fait régulièrement"}, {"id": "4-25", "s": "Phrases", "en": "I don't eat any", "fr": "je n'en mange pas"}, {"id": "4-26", "s": "Phrases", "en": "No, I don't do any", "fr": "Non, je n'en fais pas"}, {"id": "4-27", "s": "Phrases", "en": "How much / how many …?", "fr": "Combien de / d' …?"}, {"id": "4-28", "s": "Phrases", "en": "Do / did …? (question starter)", "fr": "Est-ce que / qu' …?"}, {"id": "4-29", "s": "Phrases", "en": "IDIOM: to feel under the weather (lit. not to be in one's plate)", "fr": "ne pas être dans son assiette"}, {"id": "4-30", "s": "Phrases", "en": "IDIOM: to be full of beans / energy (lit. to have the peach)", "fr": "avoir la pêche"}, {"id": "4-31", "s": "Phrases", "en": "IDIOM: to have a six-pack (lit. chocolate bars)", "fr": "avoir des tablettes de chocolat"}, {"id": "4-32", "s": "Phrases", "en": "IDIOM: to put your foot in it (lit. feet in the dish)", "fr": "mettre les pieds dans le plat"}, {"id": "4-33", "s": "Phrases", "en": "IDIOM: to make a big fuss about nothing (lit. a whole cheese)", "fr": "en faire tout un fromage"}, {"id": "4-34", "s": "Phrases", "en": "IDIOM: to faint (lit. fall into the apples)", "fr": "tomber dans les pommes"}];
+const SECS = [["All","All"],["Food","Food"],["Lifestyle","Lifestyle"],["Diet","Diet"],["Phrases","Phrases"],["Hard","★ Hard ones"]];
+const LS = k => "raven-fr-12oct-" + k;
+const load = (k,d) => { try { const v = localStorage.getItem(LS(k)); return v===null ? d : JSON.parse(v); } catch(e){ return d; } };
+const save = (k,v) => { try { localStorage.setItem(LS(k), JSON.stringify(v)); } catch(e){} };
+
+let st = { mode: load("mode","cards"), deck: load("deck","All"), dir: load("dir","en"), dark: load("dark", window.matchMedia && matchMedia("(prefers-color-scheme: dark)").matches) };
+let hard = new Set(load("hard", []));
+let queue = [], cur = null, flipped = false, answered = false, score = 0, streak = 0, best = 0, seen = 0, startCount = 0;
+
+const $ = id => document.getElementById(id);
+const esc = s => s.replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const shuffle = a => { a = a.slice(); for (let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; };
+function toast(t){ const e=$("toast"); e.textContent=t; e.classList.add("show"); clearTimeout(toast.t); toast.t=setTimeout(()=>e.classList.remove("show"),1600); }
+
+function deckWords(){
+  if (st.deck==="All") return WORDS;
+  if (st.deck==="Hard") return WORDS.filter(w=>hard.has(w.id));
+  return WORDS.filter(w=>w.s===st.deck);
+}
+const prompt = w => st.dir==="en" ? w.en : w.fr;
+const answer = w => st.dir==="en" ? w.fr : w.en;
+
+/* ---- answer checking: case- and accent-insensitive, ignores punctuation, (m)/(f), extra spaces ---- */
+function norm(s){
+  return s.toLowerCase()
+    .replace(/œ/g,"oe").replace(/æ/g,"ae")
+    .normalize("NFD").replace(/[\u0300-\u036f]/g,"")
+    .replace(/\((m|f)\)/g," ")
+    .replace(/[’‘`´]/g,"'")
+    .replace(/'/g," ")
+    .replace(/[?!.,;:…"«»()\-]/g," ")
+    .replace(/\s+/g," ").trim();
+}
+function variants(ans){
+  const v = new Set([norm(ans)]);
+  ans.split(" / ").forEach(p => v.add(norm(p)));
+  // "il faut + infinitive" -> accept "il faut"
+  [...v].forEach(x => { const y = x.replace(/\+ ?infinitive/,"").trim(); if (y) v.add(y); });
+  v.delete("");
+  return [...v];
+}
+function lev(a,b){
+  const m=a.length,n=b.length; if(!m) return n; if(!n) return m;
+  let p=Array.from({length:n+1},(_,i)=>i);
+  for(let i=1;i<=m;i++){ let c=[i]; for(let j=1;j<=n;j++) c[j]=Math.min(p[j]+1,c[j-1]+1,p[j-1]+(a[i-1]===b[j-1]?0:1)); p=c; }
+  return p[n];
+}
+function check(input, ans){
+  const g = norm(input).replace(/ /g,""); if (!g) return "bad";
+  const vs = variants(ans).map(v=>v.replace(/ /g,""));
+  if (vs.includes(g)) return "ok";
+  const d = Math.min(...vs.map(v=>lev(g,v)));
+  const tol = Math.max(1, Math.floor(Math.min(...vs.map(v=>v.length))/8));
+  return d<=tol ? "near" : "bad";
+}
+
+/* ---- setup ---- */
+function buildChips(){
+  const box = $("decks"); box.innerHTML = "";
+  SECS.forEach(([k,label]) => {
+    const n = k==="All" ? WORDS.length : k==="Hard" ? hard.size : WORDS.filter(w=>w.s===k).length;
+    const b = document.createElement("button");
+    b.textContent = `${label} (${n})`; b.className = st.deck===k ? "on" : "";
+    b.onclick = () => { st.deck=k; save("deck",k); buildChips(); restart(); };
+    box.appendChild(b);
+  });
+}
+function applyTheme(){ document.documentElement.classList.toggle("dark", !!st.dark); document.querySelector('meta[name=theme-color]').content = st.dark ? "#141821" : "#f6f4ef"; }
+function applyDir(){ $("dirBtn").textContent = st.dir==="en" ? "EN→FR" : "FR→EN"; }
+function setMode(m){ st.mode=m; save("mode",m); document.querySelectorAll("#modes button").forEach(b=>b.classList.toggle("on", b.dataset.m===m)); restart(); }
+
+function restart(){
+  queue = shuffle(deckWords()); startCount = queue.length;
+  score = 0; streak = 0; seen = 0;
+  next();
+}
+function updStats(){
+  const left = queue.length + (cur ? 1 : 0);
+  $("sScore").textContent = `Score ${score}/${seen}`;
+  $("sStreak").textContent = `Streak ${streak}${best>1?" · best "+best:""}`;
+  $("sLeft").textContent = `${left} left`;
+  const done = startCount ? (startCount - left)/startCount : 0;
+  $("prog").style.width = Math.max(0,Math.min(100,done*100)) + "%";
+}
+function markHard(w, isHard){
+  if (isHard) hard.add(w.id); else hard.delete(w.id);
+  save("hard", [...hard]); buildChips();
+}
+function record(ok){
+  seen++;
+  if (ok){ score++; streak++; best=Math.max(best,streak); } else streak = 0;
+}
+
+function next(){
+  cur = queue.shift() || null; flipped = false; answered = false;
+  updStats();
+  if (!cur) return finish();
+  ({cards:renderCard, type:renderType, quiz:renderQuiz})[st.mode]();
+}
+
+function cardHead(w){
+  return `<span class="sec">${w.s}</span>${hard.has(w.id)?'<span class="star">★</span>':''}`;
+}
+
+/* ---- Flashcards ---- */
+function renderCard(){
+  const w = cur;
+  $("stage").innerHTML = `
+   <div class="card" id="fc">${cardHead(w)}
+     <span class="lab">${flipped ? (st.dir==="en"?"French":"English") : (st.dir==="en"?"English":"French")}</span>
+     <div class="big">${esc(flipped ? answer(w) : prompt(w))}</div>
+     ${flipped ? `<div class="sub">${esc(prompt(w))}</div>` : `<div class="sub">Say it out loud, then tap to check</div>`}
+   </div>
+   ${flipped ? `<div class="btns"><button class="b-bad" id="no">← Still learning</button><button class="b-ok" id="yes">I knew it →</button></div>`
+             : `<button class="main" id="flip">Show answer</button>`}
+   <p class="hint">Tap card or Space to flip · ← still learning · → knew it</p>`;
+  $("fc").onclick = flip;
+  if (flipped){ $("no").onclick = () => grade(false); $("yes").onclick = () => grade(true); }
+  else $("flip").onclick = flip;
+}
+function flip(){ if (st.mode!=="cards"||!cur) return; flipped = !flipped; renderCard(); }
+function grade(ok){
+  if (!cur || st.mode!=="cards") return;
+  if (!flipped){ flipped = true; renderCard(); return; }
+  record(ok);
+  if (ok){ if (st.deck==="Hard") markHard(cur,false); }
+  else { markHard(cur,true); queue.splice(Math.min(queue.length, 4+Math.floor(Math.random()*4)), 0, cur); startCount++; }
+  next();
+}
+
+/* ---- Type it ---- */
+const ACC = ["é","è","ê","à","â","ç","î","ô","û","ù","ë","ï","œ"];
+function renderType(){
+  const w = cur, toFr = st.dir==="en";
+  $("stage").innerHTML = `
+   <div class="card" style="cursor:default;min-height:170px">${cardHead(w)}
+     <span class="lab">${toFr?"English → type the French":"French → type the English"}</span>
+     <div class="big">${esc(prompt(w))}</div>
+   </div>
+   <input type="text" id="ans" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="${toFr?"Type in French…":"Type in English…"}">
+   ${toFr?`<div class="acc">${ACC.map(a=>`<button data-a="${a}">${a}</button>`).join("")}</div>`:""}
+   <div class="fb" id="fb"></div>
+   <div class="btns" id="tbtns"><button class="b-sec" id="skip">Show me</button><button class="b-ok" id="go">Check</button></div>
+   <p class="hint">Accents and capitals don't matter. Enter to check, Enter again for next.</p>`;
+  const inp = $("ans"); setTimeout(()=>inp.focus(), 50);
+  document.querySelectorAll(".acc button").forEach(b => b.onclick = () => {
+    const s=inp.selectionStart??inp.value.length, e=inp.selectionEnd??s;
+    inp.value = inp.value.slice(0,s)+b.dataset.a+inp.value.slice(e); inp.focus(); inp.setSelectionRange(s+1,s+1);
+  });
+  inp.addEventListener("keydown", e => { if (e.key==="Enter"){ e.preventDefault(); answered ? next() : submitType(); } });
+  $("go").onclick = () => answered ? next() : submitType();
+  $("skip").onclick = () => submitType(true);
+}
+function submitType(giveUp){
+  if (answered) return; answered = true;
+  const w = cur, inp = $("ans"), fb = $("fb");
+  const r = giveUp ? "bad" : check(inp.value, answer(w));
+  inp.blur();
+  if (r==="ok"){ fb.className="fb ok"; fb.innerHTML = `✓ Correct! <b>${esc(answer(w))}</b>`; record(true); if (st.deck==="Hard") markHard(w,false); }
+  else if (r==="near"){ fb.className="fb near"; fb.innerHTML = `Nearly! Check the spelling: <b>${esc(answer(w))}</b><br><span class="small">Counted as right, and added to ★ Hard ones.</span>`; record(true); markHard(w,true); }
+  else { fb.className="fb bad"; fb.innerHTML = `${giveUp?"":"✗ Not quite. "}Answer: <b>${esc(answer(w))}</b>${inp.value.trim()?`<br><span class="small">You wrote: ${esc(inp.value)}</span>`:""}
+     <br><button class="link" id="override">I was right, count it</button>`; record(false); markHard(w,true);
+     queue.splice(Math.min(queue.length,5), 0, w); startCount++;
+     $("override").onclick = () => { score++; streak = 1; queue.splice(queue.indexOf(w),1); startCount--; markHard(w,false); toast("Counted ✓"); next(); };
+  }
+  $("tbtns").innerHTML = `<button class="main" id="nx">Next →</button>`;
+  $("nx").onclick = next; $("nx").focus();
+  updStats();
+}
+
+/* ---- Quiz ---- */
+function renderQuiz(){
+  const w = cur, ans = answer(w);
+  const pool = WORDS.filter(x => x.id!==w.id && answer(x)!==ans);
+  const same = shuffle(pool.filter(x=>x.s===w.s));
+  // prefer distractors of similar length
+  same.sort((a,b)=>Math.abs(answer(a).length-ans.length)-Math.abs(answer(b).length-ans.length));
+  const picks = shuffle(same.slice(0,8)).slice(0,3);
+  while (picks.length<3){ const x = pool[Math.floor(Math.random()*pool.length)]; if (!picks.includes(x)) picks.push(x); }
+  const opts = shuffle([w, ...picks]);
+  $("stage").innerHTML = `
+   <div class="card" style="cursor:default;min-height:170px">${cardHead(w)}
+     <span class="lab">${st.dir==="en"?"Pick the French":"Pick the English"}</span>
+     <div class="big">${esc(prompt(w))}</div>
+   </div>
+   <div class="opts">${opts.map((o,i)=>`<button data-id="${o.id}"><span class="small">${i+1}</span>&nbsp; ${esc(answer(o))}</button>`).join("")}</div>
+   <div class="fb" id="fb"></div>
+   <p class="hint">Tap an answer or press 1–4 · Enter for next</p>`;
+  document.querySelectorAll(".opts button").forEach(b => b.onclick = () => pickQuiz(b));
+}
+function pickQuiz(b){
+  if (answered){ next(); return; }
+  answered = true;
+  const w = cur, ok = b.dataset.id===w.id;
+  document.querySelectorAll(".opts button").forEach(x => { if (x.dataset.id===w.id) x.classList.add("right"); });
+  if (!ok){ b.classList.add("wrong"); markHard(w,true); queue.splice(Math.min(queue.length,5),0,w); startCount++; }
+  else if (st.deck==="Hard") markHard(w,false);
+  record(ok);
+  const fb=$("fb"); fb.className = ok?"fb ok":"fb bad";
+  fb.innerHTML = ok ? "✓ Yes!" : `✗ It's <b>${esc(answer(w))}</b>`;
+  updStats();
+  setTimeout(()=>{ if (answered && cur===w) next(); }, ok ? 800 : 2200);
+}
+
+/* ---- Finish ---- */
+function finish(){
+  updStats();
+  if (!startCount){
+    $("stage").innerHTML = `<div class="card" style="cursor:default"><div class="big">No ★ Hard ones yet</div><div class="sub">Cards you mark "Still learning" or get wrong land here. Pick another deck to start.</div></div>`;
+    return;
+  }
+  const pct = seen ? Math.round(score/seen*100) : 0;
+  $("stage").innerHTML = `<div class="card done" style="cursor:default">
+    <div class="tick">✓</div><div class="big">Deck done!</div>
+    <div class="sub">${score}/${seen} right (${pct}%) · best streak ${best}</div>
+    <div class="sub">★ Hard ones now: ${hard.size}</div></div>
+    <div class="btns">${hard.size?`<button class="b-bad" id="goHard">Practise ★ Hard ones</button>`:""}<button class="b-ok" id="again">Go again</button></div>`;
+  $("again").onclick = restart;
+  if ($("goHard")) $("goHard").onclick = () => { st.deck="Hard"; save("deck","Hard"); buildChips(); restart(); };
+  confetti();
+}
+function confetti(){
+  const box=$("confetti"), cols=["#4f6bed","#1f9d6b","#d98a1f","#e0559b","#5bc0de"];
+  for(let i=0;i<60;i++){ const e=document.createElement("i"); e.style.left=Math.random()*100+"vw"; e.style.background=cols[i%5]; e.style.animationDelay=Math.random()*.6+"s"; e.style.transform=`rotate(${Math.random()*360}deg)`; box.appendChild(e); }
+  setTimeout(()=>box.innerHTML="",3200);
+}
+
+/* ---- keyboard ---- */
+document.addEventListener("keydown", e => {
+  if (e.target.tagName==="INPUT") return;
+  if (st.mode==="cards"){
+    if (e.key===" "||e.key==="ArrowUp"||e.key==="ArrowDown"){ e.preventDefault(); flip(); }
+    else if (e.key==="ArrowLeft") grade(false);
+    else if (e.key==="ArrowRight") grade(true);
+  } else if (st.mode==="quiz"){
+    if (/^[1-4]$/.test(e.key)){ const b=document.querySelectorAll(".opts button")[+e.key-1]; if (b) pickQuiz(b); }
+    else if (e.key==="Enter" && answered) next();
+  } else if (st.mode==="type" && e.key==="Enter" && answered){ next(); }
+});
+
+$("themeBtn").onclick = () => { st.dark=!st.dark; save("dark",st.dark); applyTheme(); };
+$("dirBtn").onclick = () => { st.dir = st.dir==="en"?"fr":"en"; save("dir",st.dir); applyDir(); restart(); };
+document.querySelectorAll("#modes button").forEach(b => b.onclick = () => setMode(b.dataset.m));
+$("restart").onclick = restart;
+$("clearHard").onclick = () => { if (confirm("Clear all ★ Hard ones?")){ hard.clear(); save("hard",[]); buildChips(); if (st.deck==="Hard") restart(); } };
+$("total").textContent = WORDS.length;
+
+{ const h=location.hash.slice(1); if (["cards","type","quiz"].includes(h)) st.mode=h; if (h==="dark") st.dark=true; }
+applyTheme(); applyDir(); buildChips();
+document.querySelectorAll("#modes button").forEach(b=>b.classList.toggle("on", b.dataset.m===st.mode));
+restart();
+</script>
+</body>
+</html>
